@@ -134,35 +134,35 @@ otu_tb18_t_ss5000_no_cero --> 123 25358
 ## 3.1) Richness and evenness (Shannon index)
 
 ```{r shannon_index1, echo=FALSE}
-otu_tb18_div <- diversity(otu_tb18_t_ss4055_no_cero, index="shannon")
+otu_tb18_ss5000_div <- diversity(otu_tb18_t_ss5000_no_cero, index="shannon")
 ```
 
-Most of the samples get Shannon Index values between 5 and 6:
+Most of the samples take Shannon Index values between 5 and 6:
 ```{r shannon_index2, echo=FALSE}
-boxplot(otu_tb18_div, pch=19, main="Shannon's index of diversity")
-plot(sort(otu_tb18_div), pch=19, main="Shannon's index of diversity")
+boxplot(otu_tb18_ss5000_div, pch=19, main="Shannon's index of diversity")
+plot(sort(otu_tb18_ss5000_div), pch=19, main="Shannon's index of diversity")
 ```
 
 ## 3.2) Richness: OTU number
 
 ```{r richness_otu_no1, echo=FALSE}
-OTUs_per_sample_18S<-specnumber(otu_tb18_t_ss4055_no_cero)
+OTUs_per_sample_18S_ss5000<-specnumber(otu_tb18_t_ss5000_no_cero)
 ```
 
 Lowest number of OTUs per sample:
 ```{r richness_otu_no2, echo=FALSE}
-min(OTUs_per_sample_18S)
+min(OTUs_per_sample_18S_ss5000)
 ```
 
 Maximum number of OTUs per sample:
 ```{r richness_otu_no3, echo=FALSE}
-max(OTUs_per_sample_18S)
+max(OTUs_per_sample_18S_ss5000)
 ```
 
-In most of the samples, we can identify between 850 and 1200 OTUs:
+In most of the samples, we can identify between 1000 and 1300 OTUs:
 ```{r richness_otu_no4, echo=TRUE}
-plot(sort(OTUs_per_sample_18S), pch=19)
-boxplot(OTUs_per_sample_18S, pch=19)
+plot(sort(OTUs_per_sample_18S_ss5000), pch=19)
+boxplot(OTUs_per_sample_18S_ss5000, pch=19)
 ```
 
 ## 3.3) Index of evenness
@@ -170,29 +170,31 @@ boxplot(OTUs_per_sample_18S, pch=19)
 ### 3.3.1) Pielou's index
 
 ```{r pielou_index_of_evenness1, echo=TRUE}
-pielou_evenness_18S <- otu_tb18_div/log(OTUs_per_sample_18S)
+pielou_evenness_18S_ss5000 <- otu_tb18_ss5000_div/log(OTUs_per_sample_18S_ss5000)
 ```
 
-Most of the samples get values around 0.8, meaning that the numerical composition of different OTUs in a sample is highly similar:
+Most of the samples get values between 0.8 and 0.9, meaning that the numerical composition of different OTUs in a sample is highly similar:
 
 ```{r pielou_index_of_evenness2, echo=TRUE}
-plot(sort(pielou_evenness_18S), pch=19)
-boxplot(pielou_evenness_18S, pch=19)
+plot(sort(pielou_evenness_18S_ss5000), pch=19)
+boxplot(pielou_evenness_18S_ss5000, pch=19)
 ```
 
 The OTU_2, with 26077 reads, is the most abundant in the overall dataset:
 ```{r OTUs_overall_abundance, echo=TRUE}
-head(sort(colSums(otu_tb18_t_ss4055_no_cero), decreasing=T), n=10L)
+head(sort(colSums(otu_tb18_t_ss5000_no_cero), decreasing=T), n=10L)
 ```
 
-Most of OTUs show very few occurrences:
+Most of the OTUs show very few occurrences:
 ```{r OTUs_overall_abundance2, echo=TRUE}
-plot(log(sort(colSums(otu_tb18_t_ss4055_no_cero), decreasing=T)), pch=19)
+plot(log(sort(colSums(otu_tb18_t_ss5000_no_cero), decreasing=T)), pch=19)
 ```
 
+<!---
 ### 3.3.2) Sads
 library(sads)
 ?sads
+--->
 
 ## 3.4) Abundance Models
 ### 3.4.1) Rank-Abundance or Dominance/Diversity Model ("radfit")
@@ -203,29 +205,27 @@ In the following plot we can appreciate that, as expected, our OTUs abundance di
 #?radfit
 #otu_tb18_t[1:5,1:5]
 
-otu_tb18_radfit<-radfit(colSums(otu_tb18_t))
-plot(otu_tb18_radfit)
+otu_tb18_min5000_radfit<-radfit(colSums(otu_tb18_min5000_t))
+plot(otu_tb18_min5000_radfit)
 ```
 
 ### 3.4.2) Preston's Lognormal Model
 
-Preston's lognormal model fit into species frequencies groups (we're missing ~15,656 species):
-```{r preston_model1, echo=5}
-?prestonfit
+Preston's lognormal model fit into species frequencies groups (we're missing ~3,204 species):
+```{r preston_model1, echo=T}
+otu_tb18_min5000_prestonfit<-prestonfit(colSums(otu_tb18_min5000_t))
+plot(otu_tb18_min5000_prestonfit, main="Pooled species")
 
-otu_tb18_prestonfit<-prestonfit(colSums(otu_tb18_t))
-plot(otu_tb18_prestonfit, main="Pooled species")
-
-veiledspec(otu_tb18_prestonfit)
+veiledspec(otu_tb18_min5000_prestonfit)
 ```
 
 Preston's lognormal model fit without pooling data into groups (we're missing ~3,029 species):
 ```{r preston_model2, echo=4}
-otu_tb18_dist_all<-prestondistr(colSums(otu_tb18_t))
-plot(otu_tb18_prestonfit, main="All malaspina")
-lines(otu_tb18_dist_all, line.col="blue3")
+otu_tb18_min5000_dist_all<-prestondistr(colSums(otu_tb18_min5000_t))
+plot(otu_tb18_min5000_prestonfit, main="All malaspina")
+lines(otu_tb18_min5000_dist_all, line.col="blue3")
 
-veiledspec(otu_tb18_dist_all)
+veiledspec(otu_tb18_min5000_dist_all)
 ```
 
 ## 3.5) Rarefaction curve
@@ -257,8 +257,8 @@ The index Bray-Curtis allows us to quantify the differences between samples acco
 
 ```{r beta_div1, echo=FALSE}
 #?vegdist
-otu_tb18_t_ss4055_no_cero.bray<-vegdist(otu_tb18_t_ss4055_no_cero, method="bray")
-boxplot(otu_tb18_t_ss4055_no_cero.bray, main="Bray-Curtis dissimilarity matrix")
+otu_tb18_t_ss5000_no_cero.bray<-vegdist(otu_tb18_t_ss5000_no_cero, method="bray")
+boxplot(otu_tb18_t_ss5000_no_cero.bray, main="Bray-Curtis dissimilarity matrix")
 ```
 
 ### 3.6.2) Hierarchical clustering
@@ -267,55 +267,55 @@ The only relatively evident cluster we can distinguish in the dendogram stands o
 
 ```{r beta_div2, echo=FALSE}
 #UPGMA
-otu_tb18_t_ss4055_no_cero.upgma<-hclust(otu_tb18_t_ss4055_no_cero.bray, "average")
-plot(otu_tb18_t_ss4055_no_cero.upgma, cex=.35, main="Samples Hierarchical Clustering")
+otu_tb18_t_ss5000_no_cero.upgma<-hclust(otu_tb18_t_ss5000_no_cero.bray, "average")
+plot(otu_tb18_t_ss5000_no_cero.upgma, cex=.35, main="Samples Hierarchical Clustering")
 ```
 
 ### 3.6.3) Non-metric multidimensional scaling
 
-We can identify a prominent group in the middle right side of the NMDS plot and a few isolated samples in the left edge of the plot. However, the corresponding stress parameter takes a value below 0.3 (0.2210408), suggesting that the plot may not be totally reliable. 
+We can identify a prominent group in the middle right side of the NMDS plot and a few isolated samples in the left edge of the plot. The stress parameter takes a value below 0.3 (0.2049139), suggesting that the plot is acceptable. 
 
 ```{r monoNMDS, echo=F}
 #NMDS
-otu_tb18_t_ss4055_no_cero.nmds<-monoMDS(otu_tb18_t_ss4055_no_cero.bray)
-otu_tb18_t_ss4055_no_cero.nmds
-plot(otu_tb18_t_ss4055_no_cero.nmds, main="monoMDs method")
+otu_tb18_t_ss5000_no_cero.nmds<-monoMDS(otu_tb18_t_ss5000_no_cero.bray)
+otu_tb18_t_ss5000_no_cero.nmds
+plot(otu_tb18_t_ss5000_no_cero.nmds, main="monoMDs method")
 ```
 
 When implementing a most robut function for computing NMDS plots, the result is quiet the same:
 
 ```{r metaNMDS, echo=F}
-otu_tb18_t_ss4055_no_cero.meta_nmds<-metaMDS(otu_tb18_t_ss4055_no_cero.bray)
-plot(otu_tb18_t_ss4055_no_cero.meta_nmds, main="metaMDS method")
+otu_tb18_t_ss5000_no_cero.meta_nmds<-metaMDS(otu_tb18_t_ss5000_no_cero.bray)
+plot(otu_tb18_t_ss5000_no_cero.meta_nmds, main="metaMDS method")
 ```
 
 # 4) Geographical analysis
 
 ```{r load_geo_data, echo=F, results="hide", message=F}
 #load geographical ubication of stations and sort according to otu_tb18 stations sequence.
-MP_geo<-read.table(file="/home/laura/Documents/TFM/home/data/MALASPINA/mp_surface_ubication.txt", sep="\t", header=T)
+MP_geo_18S_ss5000<-read.table(file="/home/laura/Documents/TFM/home/data/MALASPINA/mp_surface_ubication.txt", sep="\t", header=T)
 
-row.names(MP_geo)<-MP_geo[,1]
+row.names(MP_geo_18S_ss5000)<-MP_geo_18S_ss5000[,1]
 
-MP_geo_18sorted<-MP_geo[row.names(otu_tb18_t_ss4055_no_cero),]
-dim(MP_geo_18sorted)
-MP_geo_18sorted[1:5,1:5]
-otu_tb18_t_ss4055_no_cero[1:5,1:5]
+MP_geo_18sorted_ss5000<-MP_geo_18S_ss5000[row.names(otu_tb18_t_ss5000_no_cero),]
+dim(MP_geo_18sorted_ss5000)
+MP_geo_18sorted_ss5000[1:5,1:5]
+otu_tb18_t_ss5000_no_cero[1:5,1:5]
 
 #read lat-long in decimal degrees and translate into distance in km.
 library(fossil)
 
 #select only columns containing info about station, latitude and longitude.
-MP_geo_18sorted_v2<-create.lats(MP_geo_18sorted, loc="sample", long="long", lat="lat")
-head(MP_geo_18sorted_v2)
+MP_geo_18sorted_ss5000_v2<-create.lats(MP_geo_18sorted_ss5000, loc="sample", long="long", lat="lat")
+head(MP_geo_18sorted_ss5000)
 
 #create a distance matrix (lower triangle) between a list of points.
-geo_distances_MP_euks<-earth.dist(MP_geo_18sorted_v2, dist = TRUE)
-head(geo_distances_MP_euks)
-dim(geo_distances_MP_euks)
+geo_distances_MP_18S_ss5000<-earth.dist(MP_geo_18sorted_ss5000_v2, dist = TRUE)
+head(geo_distances_MP_18S_ss5000)
+dim(geo_distances_MP_18S_ss5000)
 
-geo_distances_MP_euks<-as.matrix(geo_distances_MP_euks)
-dim(geo_distances_MP_euks)
+geo_distances_MP_18S_ss5000<-as.matrix(geo_distances_MP_18S_ss5000)
+dim(geo_distances_MP_18S_ss5000)
 
 #geo distances dataset ready to use "geo_distances_MP_euks"
 ```
