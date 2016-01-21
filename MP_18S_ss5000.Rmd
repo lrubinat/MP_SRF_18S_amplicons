@@ -322,63 +322,63 @@ dim(geo_distances_MP_18S_ss5000)
 
 Working datasets:
 
-1) Community matrix: otu_tb18_t_ss4055_no_cero
+1) Community matrix: otu_tb18_t_ss5000_no_cero
 ```{r working_datasets1, echo=T}
-dim(otu_tb18_t_ss4055_no_cero)
-otu_tb18_t_ss4055_no_cero[1:5, 1:5]
+dim(otu_tb18_t_ss5000_no_cero)
+otu_tb18_t_ss5000_no_cero[1:5, 1:5]
 ```
 
-2) Community Bray-Curtis: otu_tb18_t_ss4055_no_cero.bray
+2) Community Bray-Curtis: otu_tb18_t_ss5000_no_cero.bray
 ```{r working_datasets2, echo=T}
-dim(otu_tb18_t_ss4055_no_cero.bray)
-otu_tb18_t_ss4055_no_cero.bray<-as.matrix(otu_tb18_t_ss4055_no_cero.bray)
+dim(otu_tb18_t_ss5000_no_cero.bray)
+otu_tb18_t_ss5000_no_cero.bray<-as.matrix(otu_tb18_t_ss5000_no_cero.bray)
 ```
 
 3) Stations distances in km: geo_distances_mala_euks
 ```{r working_datasets3, echo=T}
-dim(geo_distances_MP_euks)
+dim(geo_distances_MP_18S_ss5000)
 ```
 
 Communities quickly change their composition across geographical distances:
 
 ```{r working_datasets4, echo=T}
-plot(geo_distances_MP_euks, otu_tb18_t_ss4055_no_cero.bray, pch=19, cex=0.4, xlab="Geopgraphic distances", ylab="Bray-Curtis dissimilarities")
+plot(geo_distances_MP_18S_ss5000, otu_tb18_t_ss5000_no_cero.bray, pch=19, cex=0.4, xlab="Geopgraphic distances", ylab="Bray-Curtis dissimilarities")
 ```
 
 ## 4.1) Mantel correlograms
 
-Mantel statistic is -significantlly- so low that we must consider there's no relationship between geographical distance and dissimilarity.
+Mantel statistic is -significantlly- so low, meaning that the correlation between samples dissimilarity and geographical distances is weak.
 
 ```{r mantel_correlogram1, echo=T}
-mantel(geo_distances_MP_euks, otu_tb18_t_ss4055_no_cero.bray)
+mantel(geo_distances_MP_18S_ss5000, otu_tb18_t_ss5000_no_cero.bray)
 ```
 
 Maximum distance between samples:
 ```{r mantel_correlogram2, echo=F}
-max(geo_distances_MP_euks)
+max(geo_distances_MP_18S_ss5000)
 ```
 
 Minimum distance between samples:
 ```{r mantel_correlogram3, echo=F}
-min(geo_distances_MP_euks)
+min(geo_distances_MP_18S_ss5000)
 ```
 
 Correlograms:
 ```{r mantel_correlogram4, echo=T}
-MP_euk_mantel_correl_by_1000km<-mantel.correlog(otu_tb18_t_ss4055_no_cero.bray, D.geo=geo_distances_MP_euks, break.pts=seq(0,20000, by=1000))
-plot(MP_euk_mantel_correl_by_1000km)
+MP_18s_ss5000_mantel_correl_by_1000km<-mantel.correlog(otu_tb18_t_ss5000_no_cero.bray, D.geo=geo_distances_MP_18S_ss5000, break.pts=seq(0,20000, by=1000))
+plot(MP_18s_ss5000_mantel_correl_by_1000km)
 
-MP_euk_mantel_correl_by_1000km<-mantel.correlog(otu_tb18_t_ss4055_no_cero.bray, D.geo=geo_distances_MP_euks, break.pts=seq(0,20000, by=100))
-plot(MP_euk_mantel_correl_by_1000km)
+MP_18s_ss5000_mantel_correl_by_100km<-mantel.correlog(otu_tb18_t_ss5000_no_cero.bray, D.geo=geo_distances_MP_18S_ss5000, break.pts=seq(0,20000, by=100))
+plot(MP_18s_ss5000_mantel_correl_by_100km)
 ```
 
 # 5) Abundance vs. occurence
 
 ```{r OTUs_mean_relative_abund, echo=F}
-otu_tb18_t_ss4055_no_cero[1:5,1:5]
-otu_tb18_t_ss4055_no_cero_t<-t(otu_tb18_t_ss4055_no_cero)
+otu_tb18_t_ss5000_no_cero[1:5,1:5]
+otu_tb18_t_ss5000_no_cero_t<-t(otu_tb18_t_ss5000_no_cero)
 
-colSums(otu_tb18_t_ss4055_no_cero_t)
+colSums(otu_tb18_t_ss5000_no_cero_t)
 
 #local abundance percentage
 otu_tb18_t_ss4055_no_cero_t.rabund<-otu_tb18_t_ss4055_no_cero_t/4055
