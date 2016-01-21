@@ -29,23 +29,29 @@ Table dimensions and content outline:
 setwd("/home/laura/Documents/TFM/genwork/data_analysis/MP_18S_SRF_amplicons/")
 
 #read data 
-otu_tb18 <- read.table(file="/home/laura/Documents/TFM/home/data/MALASPINA/otus_18S_nohyphen.txt", head=TRUE, fill=TRUE)
+otu_tb18_5000 <- read.table(file="/home/laura/Documents/TFM/home/data/MALASPINA/otus_18S_nohyphen.txt", head=TRUE, fill=TRUE)
 
 #table dimensions and format before setting column names
-#dim(otu_tb18) # 56116   125
-#otu_tb18[1:5,1:5]
+#dim(otu_tb18_ss5000) # 56116   125
+#otu_tb18_ss5000[1:5,1:5]
 
 #row names = OTU name (option A)
-row.names(otu_tb18)<-otu_tb18[,1]
+row.names(otu_tb18_5000)<-otu_tb18_5000[,1]
 
 #row names = row number (option B)
 #rownames(otu_tb18) <- 1:nrow(otu_tb18)
 
-otu_tb18<-otu_tb18[,-1]
-otu_tb18[is.na(otu_tb18)]<-0
+otu_tb18_5000<-otu_tb18_5000[,-1]
+otu_tb18_5000[is.na(otu_tb18_5000)]<-0
 
-dim(otu_tb18) #  56116   124
-otu_tb18[1:5,1:5]
+dim(otu_tb18_5000) #  56116   124
+otu_tb18_5000[1:5,1:5]
+
+#remove samples with less than 5000 OTUs
+otu_tb18_min5000<-otu_tb18_5000[,colSums(otu_tb18_5000) > 5000]
+
+min(colSums(otu_tb18_min5000))
+dim(otu_tb18_min5000) #1315 120
 ```
 
 Minimum number of OTUs per station: 4,055 OTUs.
