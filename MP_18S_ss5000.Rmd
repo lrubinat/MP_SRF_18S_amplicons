@@ -381,42 +381,42 @@ otu_tb18_t_ss5000_no_cero_t<-t(otu_tb18_t_ss5000_no_cero)
 colSums(otu_tb18_t_ss5000_no_cero_t)
 
 #local abundance percentage
-otu_tb18_t_ss4055_no_cero_t.rabund<-otu_tb18_t_ss4055_no_cero_t/4055
+otu_tb18_t_ss5000_no_cero_t.rabund<-otu_tb18_t_ss5000_no_cero_t/5000
 
-colSums(otu_tb18_t_ss4055_no_cero_t.rabund)
-otu_tb18_t_ss4055_no_cero_t.rabund[1:5,1:5]
+colSums(otu_tb18_t_ss5000_no_cero_t.rabund)
+otu_tb18_t_ss5000_no_cero_t.rabund[1:5,1:5]
 
 #OTUs mean relative abundance
-otu_tb18_t_ss4055_no_cero_t.rabund_means<-rowMeans(otu_tb18_t_ss4055_no_cero_t.rabund) 
-otu_tb18_t_ss4055_no_cero_t.rabund_means<-as.data.frame(otu_tb18_t_ss4055_no_cero_t.rabund_means)
+otu_tb18_t_ss5000_no_cero_t.rabund_means<-rowMeans(otu_tb18_t_ss5000_no_cero_t.rabund) 
+otu_tb18_t_ss5000_no_cero_t.rabund_means<-as.data.frame(otu_tb18_t_ss5000_no_cero_t.rabund_means)
 
-head(otu_tb18_t_ss4055_no_cero_t.rabund_means)
+head(otu_tb18_t_ss5000_no_cero_t.rabund_means)
 ```
 
 ```{r OTUs_occurence, echo=F}
-otu_tb18_t_ss4055_no_cero_t.rabund.occur<-otu_tb18_t_ss4055_no_cero_t.rabund
-otu_tb18_t_ss4055_no_cero_t.rabund.occur[otu_tb18_t_ss4055_no_cero_t.rabund.occur>0]<-1
-otu_tb18_t_ss4055_no_cero_t.rabund.occur[1:5,1:5] ### presence - absence table
+otu_tb18_t_ss5000_no_cero_t.rabund.occur<-otu_tb18_t_ss5000_no_cero_t.rabund
+otu_tb18_t_ss5000_no_cero_t.rabund.occur[otu_tb18_t_ss5000_no_cero_t.rabund.occur>0]<-1
+otu_tb18_t_ss5000_no_cero_t.rabund.occur[1:5,1:5] ### presence - absence table
 
 #percentage of occurence in overall stations
-otu_tb18_t_ss4055_no_cero_t.rabund_means.occurence_perc<-as.data.frame(100*(rowSums(otu_tb18_t_ss4055_no_cero_t.rabund.occur)/124))
+otu_tb18_t_ss5000_no_cero_t.rabund_means.occurence_perc<-as.data.frame(100*(rowSums(otu_tb18_t_ss5000_no_cero_t.rabund.occur)/123))
 
-str(otu_tb18_t_ss4055_no_cero_t.rabund_means.occurence_perc)
+str(otu_tb18_t_ss5000_no_cero_t.rabund_means.occurence_perc)
 ```
 
 ```{r merge_rabund_peroccur, echo=F}
-otu_tb18_rabund_percoccur<-merge(otu_tb18_t_ss4055_no_cero_t.rabund_means,otu_tb18_t_ss4055_no_cero_t.rabund_means.occurence_perc, by="row.names")
+otu_tb18_ss5000_rabund_percoccur<-merge(otu_tb18_t_ss5000_no_cero_t.rabund_means,otu_tb18_t_ss5000_no_cero_t.rabund_means.occurence_perc, by="row.names")
 
-colnames(otu_tb18_rabund_percoccur)<-c("OTUs","mean_rabund","perc_occur")
-otu_tb18_rabund_percoccur[1:5,]
+colnames(otu_tb18_ss5000_rabund_percoccur)<-c("OTUs","mean_rabund","perc_occur")
+otu_tb18_ss5000_rabund_percoccur[1:5,]
 
-row.names(otu_tb18_rabund_percoccur)<-otu_tb18_rabund_percoccur[,1]
-otu_tb18_rabund_percoccur<-otu_tb18_rabund_percoccur[,-1]
-otu_tb18_rabund_percoccur[1:5,]
+row.names(otu_tb18_ss5000_rabund_percoccur)<-otu_tb18_ss5000_rabund_percoccur[,1]
+otu_tb18_ss5000_rabund_percoccur<-otu_tb18_ss5000_rabund_percoccur[,-1]
+otu_tb18_ss5000_rabund_percoccur[1:5,]
 ```
 
 ```{r abund_vs_occurence_table, echo=F}
-plot(otu_tb18_rabund_percoccur$mean_rabund,otu_tb18_rabund_percoccur$perc_occur, log="x", pch=19, cex=0.8, xlab="Mean relative abundance", ylab="Percentage of occurence")
+plot(otu_tb18_ss5000_rabund_percoccur$mean_rabund,otu_tb18_ss5000_rabund_percoccur$perc_occur, log="x", pch=19, cex=0.8, xlab="Mean relative abundance", ylab="Percentage of occurence")
 abline(h=80, col="red") #occurence higher than 80%
 abline(v=0.00001, col="green") #rare OTUs
 abline(v=0.001, col="blue") #cosmopolitan OTUs
@@ -428,34 +428,34 @@ abline(v=0.001, col="blue") #cosmopolitan OTUs
 
 ```{r abundant_OTUs, echo=T}
 #regionally abundant
-dim(otu_tb18_rabund_percoccur[otu_tb18_rabund_percoccur$mean_rabund > 0.001,]) # 156 OTUs
-length(row.names(otu_tb18_rabund_percoccur[otu_tb18_rabund_percoccur$mean_rabund > 0.001,])) # 156 OTUs
+dim(otu_tb18_ss5000_rabund_percoccur[otu_tb18_ss5000_rabund_percoccur$mean_rabund > 0.001,]) # 157 OTUs
+length(row.names(otu_tb18_ss5000_rabund_percoccur[otu_tb18_ss5000_rabund_percoccur$mean_rabund > 0.001,])) # 157 OTUs
 
-#there are 156 regionally abundant OTUs.
+#there are 157 regionally abundant OTUs.
 (156/23264)*100 # = 0.67% of the OTUs are regionally abundant
 
-row.names(otu_tb18_rabund_percoccur[otu_tb18_rabund_percoccur$mean_rabund > 0.001,])
+row.names(otu_tb18_ss5000_rabund_percoccur[otu_tb18_ss5000_rabund_percoccur$mean_rabund > 0.001,])
 ```
 
 ```{r select_cosmopolitan, echo=T}
-otu_tb18_rabund_cosm<-otu_tb18_rabund_percoccur[otu_tb18_rabund_percoccur$mean_rabund > 0.001,]
-otu_tb18_rabund_poccur_cosm<-otu_tb18_rabund_cosm[otu_tb18_rabund_cosm$perc_occur > 80,]
-otu_tb18_cosmop_sorted<-otu_tb18_rabund_poccur_cosm[order(otu_tb18_rabund_poccur_cosm$perc_occur, otu_tb18_rabund_poccur_cosm$mean_rabund, decreasing = T), c(1,2)]
+otu_tb18_ss5000_rabund_cosm<-otu_tb18_ss5000_rabund_percoccur[otu_tb18_ss5000_rabund_percoccur$mean_rabund > 0.001,]
+otu_tb18_ss5000_rabund_poccur_cosm<-otu_tb18_ss5000_rabund_cosm[otu_tb18_ss5000_rabund_cosm$perc_occur > 80,]
+otu_tb18_ss5000_cosmop_sorted<-otu_tb18_ss5000_rabund_poccur_cosm[order(otu_tb18_ss5000_rabund_poccur_cosm$perc_occur, otu_tb18_ss5000_rabund_poccur_cosm$mean_rabund, decreasing = T), c(1,2)]
 
-otu_tb18_cosmop_sorted
+otu_tb18_ss5000_cosmop_sorted
 ```
 
 ```{r rare_OTUs, echo=T}
-dim(otu_tb18_rabund_percoccur[otu_tb18_rabund_percoccur$mean_rabund < 0.00001 & otu_tb18_rabund_percoccur$mean_rabund >0,]) # 17450 OTUs
-length(row.names(otu_tb18_rabund_percoccur[otu_tb18_rabund_percoccur$mean_rabund < 0.00001 & otu_tb18_rabund_percoccur$mean_rabund >0 ,])) # 17450 OTUs
+dim(otu_tb18_ss5000_rabund_percoccur[otu_tb18_ss5000_rabund_percoccur$mean_rabund < 0.00001 & otu_tb18_ss5000_rabund_percoccur$mean_rabund >0,]) # 17450 OTUs
+length(row.names(otu_tb18_ss5000_rabund_percoccur[otu_tb18_ss5000_rabund_percoccur$mean_rabund < 0.00001 & otu_tb18_ss5000_rabund_percoccur$mean_rabund >0 ,])) # 17450 OTUs
  
-(17450/23264)*100 # = 75.01% of the OTUs are regionally rare
+(19383/25358)*100 # = 76.44% of the OTUs are regionally rare
 
-dim(otu_tb18_rabund_percoccur) # 23264 Total OTUs
+dim(otu_tb18_ss5000_rabund_percoccur) # 25358 Total OTUs
 ```
 
 ```{r otu_col_chech, echo = T}
-dim(otu_tb18)
-otu_tb18[1:5,1:5]
+dim(otu_tb18_min5000)
+otu_tb18_min5000[1:5,1:5]
 ```
 

@@ -1,0 +1,45 @@
+load_data	>	[<-	colSums	dim	is.na	min	read.table	row.names<-	setwd
+reads_per_sample_overview1	colSums	min	otu_tb18_min5000
+reads_per_sample_overview2	colSums	max	otu_tb18_min5000
+reads_per_sample_overview3	>	colSums	otu_tb18_min5000	which
+reads_per_sample_overview4	colSums	otu_tb18_min5000	plot	sort
+species_richness_rarefaction1	library	otu_tb18_min5000	rrarefy	t
+species_richness_rarefaction2	dim	otu_tb18_t_ss5000
+species_richness_rarefaction3	otu_tb18_t_ss5000	rowSums
+species_richness_rarefaction4	==	colSums	length	otu_tb18_t_ss5000	which
+species_richness_rarefaction5	==	colSums	dim	otu_tb18_t_ss5000	which
+shannon_index1	diversity	otu_tb18_t_ss5000_no_cero
+shannon_index2	boxplot	otu_tb18_ss5000_div	plot	sort
+richness_otu_no1	otu_tb18_t_ss5000_no_cero	specnumber
+richness_otu_no2	min	OTUs_per_sample_18S_ss5000
+richness_otu_no3	max	OTUs_per_sample_18S_ss5000
+richness_otu_no4	boxplot	OTUs_per_sample_18S_ss5000	plot	sort
+pielou_index_of_evenness1	log	OTUs_per_sample_18S_ss5000	otu_tb18_ss5000_div
+pielou_index_of_evenness2	boxplot	pielou_evenness_18S_ss5000	plot	sort
+OTUs_overall_abundance	colSums	head	otu_tb18_t_ss5000_no_cero	sort	T
+OTUs_overall_abundance2	colSums	log	otu_tb18_t_ss5000_no_cero	plot	sort	T
+radfit	colSums	otu_tb18_min5000_t	plot	radfit
+preston_model1	colSums	otu_tb18_min5000_t	plot	prestonfit	veiledspec
+preston_model2	colSums	lines	otu_tb18_min5000_prestonfit	otu_tb18_min5000_t	plot	prestondistr	veiledspec
+rarefraction_curve	
+beta_div1	boxplot	otu_tb18_t_ss5000_no_cero	vegdist
+beta_div2	hclust	otu_tb18_t_ss5000_no_cero.bray	plot
+monoNMDS	monoMDS	otu_tb18_t_ss5000_no_cero.bray	plot
+metaNMDS	metaMDS	otu_tb18_t_ss5000_no_cero.bray	plot
+load_geo_data	as.matrix	create.lats	dim	earth.dist	head	library	otu_tb18_t_ss5000_no_cero	read.table	row.names	row.names<-	T
+working_datasets1	dim	otu_tb18_t_ss5000_no_cero
+working_datasets2	as.matrix	dim
+working_datasets3	dim	geo_distances_MP_18S_ss5000
+working_datasets4	geo_distances_MP_18S_ss5000	otu_tb18_t_ss5000_no_cero.bray	plot
+mantel_correlogram1	geo_distances_MP_18S_ss5000	mantel	otu_tb18_t_ss5000_no_cero.bray
+mantel_correlogram2	geo_distances_MP_18S_ss5000	max
+mantel_correlogram3	geo_distances_MP_18S_ss5000	min
+mantel_correlogram4	geo_distances_MP_18S_ss5000	mantel.correlog	otu_tb18_t_ss5000_no_cero.bray	plot	seq
+OTUs_mean_relative_abund	as.data.frame	colSums	head	otu_tb18_t_ss5000_no_cero	rowMeans	t
+OTUs_occurence	>	[<-	as.data.frame	otu_tb18_t_ss5000_no_cero_t.rabund	rowSums	str
+merge_rabund_peroccur	c	colnames<-	merge	otu_tb18_t_ss5000_no_cero_t.rabund_means	otu_tb18_t_ss5000_no_cero_t.rabund_means.occurence_perc	row.names<-
+abund_vs_occurence_table	$	abline	otu_tb18_ss5000_rabund_percoccur	plot
+abundant_OTUs	>	$	dim	length	otu_tb18_ss5000_rabund_percoccur	row.names
+select_cosmopolitan	>	$	c	order	otu_tb18_ss5000_rabund_percoccur	T
+rare_OTUs	<	>	$	&	dim	length	otu_tb18_ss5000_rabund_percoccur	row.names
+otu_col_chech	dim	otu_tb18_min5000
