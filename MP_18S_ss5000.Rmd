@@ -26,7 +26,7 @@ Table dimensions and content outline:
 
 ``` {r load_data, echo=FALSE}
 #setwd("/genwork/lrubinat")
-setwd("/home/laura/Documents/TFM/genwork/data_analysis/MP_18S_SRF_amplicons/")
+setwd("/home/laura/Documents/TFM/genwork/data_analysis/MP_18S_SRF_amplicons/MP_18S_amplicons_ss5000")
 
 #read data 
 otu_tb18_5000 <- read.table(file="/home/laura/Documents/TFM/home/data/MALASPINA/otus_18S_nohyphen.txt", head=TRUE, fill=TRUE)
@@ -44,25 +44,24 @@ row.names(otu_tb18_5000)<-otu_tb18_5000[,1]
 otu_tb18_5000<-otu_tb18_5000[,-1]
 otu_tb18_5000[is.na(otu_tb18_5000)]<-0
 
-dim(otu_tb18_5000) #  56116   124
-otu_tb18_5000[1:5,1:5]
+#dim(otu_tb18_5000) #  56116   124
+#otu_tb18_5000[1:5,1:5]
 
 #remove samples with less than 5000 OTUs
 otu_tb18_min5000<-otu_tb18_5000[,colSums(otu_tb18_5000) > 5000]
 
-min(colSums(otu_tb18_min5000))
 dim(otu_tb18_min5000) #1315 120
+otu_tb18_min5000[1:5,1:5]
 ```
 
-Minimum number of OTUs per station: 8,764 OTUs.
+Minimum number of OTUs per station:
 
 ```{r reads_per_sample_overview1, echo=1}
 min(colSums(otu_tb18_min5000)) 
 #8764
 ```
 
-
-Maximum number of OTUs per station: 1,007,852 OTUs.
+Maximum number of OTUs per station:
 
 ```{r reads_per_sample_overview2, echo=1}
 max(colSums(otu_tb18_min5000)) 

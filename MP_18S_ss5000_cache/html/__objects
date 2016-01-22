@@ -3,7 +3,7 @@ reads_per_sample_overview1
 reads_per_sample_overview2	
 reads_per_sample_overview3	amplicons_per_sample
 reads_per_sample_overview4	
-species_richness_rarefaction1	otu_tb18_min5000_t	otu_tb18_t_ss5000	.Random.seed
+species_richness_rarefaction1	otu_tb18_min5000_t	otu_tb18_t_ss5000
 species_richness_rarefaction2	
 species_richness_rarefaction3	
 species_richness_rarefaction4	

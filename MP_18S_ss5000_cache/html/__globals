@@ -1,4 +1,4 @@
-load_data	>	[<-	colSums	dim	is.na	min	read.table	row.names<-	setwd
+load_data	>	[<-	colSums	dim	is.na	read.table	row.names<-	setwd
 reads_per_sample_overview1	colSums	min	otu_tb18_min5000
 reads_per_sample_overview2	colSums	max	otu_tb18_min5000
 reads_per_sample_overview3	>	colSums	otu_tb18_min5000	which
