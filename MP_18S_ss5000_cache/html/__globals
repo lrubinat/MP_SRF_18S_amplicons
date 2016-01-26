@@ -1,9 +1,9 @@
-load_data	>	[<-	colSums	dim	is.na	read.table	row.names<-	setwd
-reads_per_sample_overview1	colSums	min	otu_tb18_min5000
-reads_per_sample_overview2	colSums	max	otu_tb18_min5000
-reads_per_sample_overview3	>	colSums	otu_tb18_min5000	which
-reads_per_sample_overview4	colSums	otu_tb18_min5000	plot	sort
-species_richness_rarefaction1	library	otu_tb18_min5000	rrarefy	t
+load_data	<	>	[<-	c	colSums	is.na	MD2304	MD2332	MD2695	MD2926	read.table	row.names<-	setwd	subset	which
+reads_per_sample_overview1	colSums	min	otu_tb18_min5000_v2
+reads_per_sample_overview2	colSums	max	otu_tb18_min5000_v2
+reads_per_sample_overview3	>	colSums	otu_tb18_min5000_v2	which
+reads_per_sample_overview4	colSums	otu_tb18_min5000_v2	plot	sort
+species_richness_rarefaction1	library	otu_tb18_min5000_v2	rrarefy	t
 species_richness_rarefaction2	dim	otu_tb18_t_ss5000
 species_richness_rarefaction3	otu_tb18_t_ss5000	rowSums
 species_richness_rarefaction4	==	colSums	length	otu_tb18_t_ss5000	which
@@ -18,9 +18,9 @@ pielou_index_of_evenness1	log	OTUs_per_sample_18S_ss5000	otu_tb18_ss5000_div
 pielou_index_of_evenness2	boxplot	pielou_evenness_18S_ss5000	plot	sort
 OTUs_overall_abundance	colSums	head	otu_tb18_t_ss5000_no_cero	sort	T
 OTUs_overall_abundance2	colSums	log	otu_tb18_t_ss5000_no_cero	plot	sort	T
-radfit	colSums	otu_tb18_min5000_t	plot	radfit
-preston_model1	colSums	otu_tb18_min5000_t	plot	prestonfit	veiledspec
-preston_model2	colSums	lines	otu_tb18_min5000_prestonfit	otu_tb18_min5000_t	plot	prestondistr	veiledspec
+radfit	colSums	otu_tb18_min5000_v2_t	plot	radfit
+preston_model1	colSums	otu_tb18_min5000_v2_t	plot	prestonfit	veiledspec
+preston_model2	colSums	lines	otu_tb18_min5000_prestonfit	otu_tb18_min5000_v2_t	plot	prestondistr	veiledspec
 rarefraction_curve	
 beta_div1	boxplot	otu_tb18_t_ss5000_no_cero	vegdist
 beta_div2	hclust	otu_tb18_t_ss5000_no_cero.bray	plot
@@ -39,7 +39,11 @@ OTUs_mean_relative_abund	as.data.frame	colSums	head	otu_tb18_t_ss5000_no_cero	ro
 OTUs_occurence	>	[<-	as.data.frame	otu_tb18_t_ss5000_no_cero_t.rabund	rowSums	str
 merge_rabund_peroccur	c	colnames<-	merge	otu_tb18_t_ss5000_no_cero_t.rabund_means	otu_tb18_t_ss5000_no_cero_t.rabund_means.occurence_perc	row.names<-
 abund_vs_occurence_table	$	abline	otu_tb18_ss5000_rabund_percoccur	plot
-abundant_OTUs	>	$	dim	length	otu_tb18_ss5000_rabund_percoccur	row.names
-select_cosmopolitan	>	$	c	order	otu_tb18_ss5000_rabund_percoccur	T
-rare_OTUs	<	>	$	&	dim	length	otu_tb18_ss5000_rabund_percoccur	row.names
-otu_col_chech	dim	otu_tb18_min5000
+abundant_OTUs	>	$	c	dim	order	otu_tb18_ss5000_rabund_percoccur	T
+select_cosmopolitan	>	$	c	dim	order	otu_tb18_ss5000_rabund_percoccur	T
+rare_OTUs	<	>	$	&	dim	otu_tb18_ss5000_rabund_percoccur
+otu_col_chech	dim	otu_tb18_min5000_v2	otu_tb18_ss5000_rabund_percoccur
+otu_col_chech2	dim	otu_tb18_min5000
+starting_dataset	dim	otu_tb18_min5000_v2
+abundant_OTUs2	
+percentage_cosmopolitan	
